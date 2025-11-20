@@ -12,4 +12,3 @@ def save_data(data):
 		data_json = json.dumps(data)
 		file.write(data_json)
 
-print(load_data()[0])
