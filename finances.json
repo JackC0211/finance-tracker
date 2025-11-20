@@ -1,0 +1,9 @@
+[
+  {
+    "type": "expense",
+    "amount": 12.50,
+    "category": "Food",
+    "date": "2025-11-20",
+    "description": "McDonalds"
+  }
+]
