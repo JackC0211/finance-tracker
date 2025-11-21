@@ -1,7 +1,8 @@
-import json
 from datetime import date
+import json
 
-DATA_FILE = "finances.json"
+from transaction import Transaction
+
 
 def load_data() -> dict: # opens the file and returns all of the saved data in file
 	try:
