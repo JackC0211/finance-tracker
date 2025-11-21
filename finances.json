@@ -1,37 +1,33 @@
-[
-  {
-    "type": "expense",
-    "amount": 12.5,
-    "category": "Food",
-    "date": "2025-11-20",
-    "description": "McDonalds"
-  },
-  {
-    "type": "expense",
-    "amount": 1.5,
-    "category": "Food",
-    "date": "2025-11-20",
-    "description": "Coop"
-  },
-  {
-    "type": "expense",
-    "amount": 59.99,
-    "category": "Game",
-    "date": "2025-11-20",
-    "description": "COD BO7"
-  },
-  {
-    "type": "a",
-    "amount": "a",
-    "category": "a",
-    "date": "a",
-    "description": "a"
-  },
-  {
-    "type": "expense",
-    "amount": 0,
-    "category": "General",
-    "date": "2025-20-11",
-    "description": ""
-  }
-]
+{
+  "balance": 50.0,
+  "transactions": [
+    {
+      "type": "expense",
+      "amount": 20.0,
+      "category": "food",
+      "date": "2025-11-21",
+      "description": "maccies"
+    },
+    {
+      "type": "income",
+      "amount": 100.0,
+      "category": "salary",
+      "date": "2025-11-21",
+      "description": "part-time"
+    },
+    {
+      "type": "expense",
+      "amount": 10.0,
+      "category": "food",
+      "date": "2025-11-21",
+      "description": "drinks"
+    },
+    {
+      "type": "expense",
+      "amount": 20.0,
+      "category": "food",
+      "date": "2025-11-21",
+      "description": "eating out"
+    }
+  ]
+}
