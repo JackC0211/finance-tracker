@@ -1,10 +1,17 @@
-Program to track your expenditures
+Program to track your expenditures using python
 
-saves to json file very basic has a read and right function - expand into something bigger
+Currently saves transactions and balance into a JSON file which can be read and written to
 
-got base working in terminal
+Functionality:
+	- View Balance
+	- Add Transactions
 
- - allow more user customisation
- - create gui
-
- - add ways to see graphs (matplotlib)
+To add:
+	-	Delete transactions
+	- Edit transactions
+	- Find useful info
+		- Profit / Expenditure in any given time
+		- Trends (maybe with graphs later)
+	- Add recurring payments
+	- Add a UI (web or tkinter)
+	- Add graphs in said UI
