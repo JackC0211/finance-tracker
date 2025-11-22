@@ -58,16 +58,15 @@ def main() -> None:
 		print("2- Add Transaction")
 		print("3- Delete Transaction")
 		print("4- Edit Transaction")
-		print("5- Close")
+		print("5- Close \n ")
 		try:
 			answer = int(input())
 		except ValueError:
 			print("Invalid input.\n")
 			continue
-
 		match answer:
 			case 1:
-				print(f'£{app_object.balance}') #FIXME round balance
+				print(f'\n£{app_object.balance} \n') #FIXME round balance
 			case 2:
 				myTransaction = get_data_from_user()
 				app_object.add_transaction(myTransaction)

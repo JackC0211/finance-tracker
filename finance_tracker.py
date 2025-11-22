@@ -46,6 +46,7 @@ class FinanceTracker:
 		------
 		ValueError
 			If the transaction type is not "income" or "expense"
+
 		Notes
 		-----
 		Automatically saves changes to file using `save_data`

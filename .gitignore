@@ -2,6 +2,6 @@
 .vscode/
 
 venv/
-data/
+data/finances.json
 __pycache__/
 *.py[cod]
