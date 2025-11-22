@@ -1,38 +1,12 @@
 from datetime import date
 import json
 
+from finance_tracker import FinanceTracker
 from transaction import Transaction
 
 
-def load_data() -> dict: # opens the file and returns all of the saved data in file
-	try:
-		with open(DATA_FILE, "r") as file:
-			try:
-				data = json.load(file)
-				if "balance" not in data or "transactions" not in data:
-					return {"balance": 0.0, "transactions": []}
-				return data
-			except ValueError:
-				return {"balance": 0.0, "transactions": []}
-	except FileNotFoundError:
-		return {"balance": 0.0, "transactions": []}
 	
-def save_data(data:dict):
-	with open(DATA_FILE, "w") as file:
-		json.dump(data, file, indent=2)
-	
-def add_transaction(tx:dict):
-	data = load_data()
-	data["transactions"].append(tx)
-
-	if tx["type"] == "income":
-		data["balance"] += tx["amount"]
-	else:
-		data["balance"] -= tx["amount"]
-	
-	save_data(data)
-	
-def get_data_from_user() -> dict: # creates a dict of user input --- returns json formatted data
+def get_data_from_user() -> Transaction: # creates a dict of user input --- returns json formatted data
 	user_inputs:dict = {}
 
 	# type
@@ -63,13 +37,17 @@ def get_data_from_user() -> dict: # creates a dict of user input --- returns jso
 	# Description
 	user_inputs['description'] = input("description: ").strip() or ""
 
-	return user_inputs
-
-def find_balance() -> float: # TODO keep a balance saved in file somehwere to be called
-	return round(load_data()["balance"],2)
+	return Transaction(
+    user_inputs["type"],
+    user_inputs["amount"],
+    user_inputs["category"],
+    user_inputs["date"],
+    user_inputs["description"]
+)
 
 
 def main():
+	app_object = FinanceTracker()
 	while True:
 		print(
 			"\n1- Check Balance\n"
@@ -83,11 +61,13 @@ def main():
 		except ValueError:
 			print("Invalid input.\n")
 			continue
+
 		match answer:
 			case 1:
-				print(f'£{find_balance()}')
+				print(f'£{app_object.balance}')
 			case 2:
-				add_transaction(get_data_from_user())
+				myTransaction = get_data_from_user()
+				app_object.add_transaction(myTransaction)
 			case 3:
 				pass #TODO add a way to delete a transaction - maybe withj a date, amount and description
 			case 4:
