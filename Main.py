@@ -3,11 +3,11 @@ import json
 
 from finance_tracker import FinanceTracker
 from transaction import Transaction
-
+from storage import load_data, save_data
 
 	
 def get_data_from_user() -> Transaction: # creates a dict of user input --- returns json formatted data
-	user_inputs:dict = {}
+	user_inputs:dict[str, str|float] = {}
 
 	# type
 	while True:
@@ -64,7 +64,7 @@ def main():
 
 		match answer:
 			case 1:
-				print(f'£{app_object.balance}')
+				print(f'£{app_object.balance}') #FIXME round balance
 			case 2:
 				myTransaction = get_data_from_user()
 				app_object.add_transaction(myTransaction)
