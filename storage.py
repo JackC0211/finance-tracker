@@ -15,10 +15,11 @@ def load_data() -> dict:
 
 		dict
 		  a dictionary with keys:
-			- "balance" : float
-				The current account balance
-			- "transactions" : list of Transaction objects
-				List of all recorded transactions
+
+				"balance" : float
+					The current account balance
+				"transactions" : list of Transaction objects
+					List of all recorded transactions
 		"""
 	if not DATA_FILE.exists():
 		return {"balance": 0.0,"transactions": []}
