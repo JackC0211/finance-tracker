@@ -52,3 +52,8 @@ class Transaction:
 	def __str__(self) -> str:
 		"""Returns a readable string of the transaction"""
 		return f"{self.date} | {self.transaction_type} | £{self.amount} | {self.category} | {self.description}"
+	
+	def __eq__(self, other):
+		if not isinstance(other, Transaction):
+			return False
+		return self.__dict__ == other.__dict__

@@ -2,7 +2,7 @@ from datetime import date
 
 from transaction import Transaction
 
-def input_transaction_new() -> Transaction:
+def input_transaction(isedit=False) -> Transaction:
 	"""
 	Collects user input for all fields to create a transaction
 	
@@ -18,7 +18,8 @@ def input_transaction_new() -> Transaction:
 	"""
 	
 	user_inputs:dict[str, str|float] = {}
-
+	if isedit:
+		print("Enter the details of the transaction you are looking for: ")
 	while True:
 		input_type = input("type (expense/income): ").strip().lower()
 		if input_type in ['expense','income']:
@@ -48,3 +49,4 @@ def input_transaction_new() -> Transaction:
     user_inputs["date"],
     user_inputs["description"]
 )
+

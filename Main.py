@@ -1,7 +1,7 @@
 from datetime import date
 
 from finance_tracker import FinanceTracker
-from input_handler import input_transaction_new
+from input_handler import input_transaction
 
 def main() -> None:
 	app_object = FinanceTracker()
@@ -18,12 +18,14 @@ def main() -> None:
 			continue
 		match answer:
 			case 1:
-				print(f'\n£{app_object.balance} \n') #FIXME round balance
+				print(f'\n£{app_object.get_balance()} \n') #FIXME round balance
 			case 2:
-				myTransaction = input_transaction_new()
+				myTransaction = input_transaction()
 				app_object.add_transaction(myTransaction)
 			case 3:
-				pass #TODO add a way to delete a transaction - maybe withj a date, amount and description
+				transaction_to_edit = app_object.find_transaction(input_transaction(isedit=True)) #TODO add a way to edit a transaction - maybe withj a date, amount and description
+				if transaction_to_edit :
+					app_object.edit_transaction(transaction_to_edit)
 			case 4:
 				pass #TODO add a way to delete a transaction
 			case 5:

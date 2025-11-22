@@ -1,5 +1,5 @@
 {
-  "balance": 980.0,
+  "balance": 156.8,
   "transactions": [
     {
       "transaction_type": "income",
@@ -24,17 +24,24 @@
     },
     {
       "transaction_type": "income",
-      "amount": 1000.0,
+      "amount": 300.0,
       "category": "General",
       "date": "2025-11-22",
       "description": ""
     },
     {
       "transaction_type": "expense",
-      "amount": 10.0,
-      "category": "Game",
+      "amount": 43.2,
+      "category": "Food",
       "date": "2025-11-22",
       "description": ""
+    },
+    {
+      "transaction_type": "expense",
+      "amount": 90.0,
+      "category": "Food",
+      "date": "2025-11-20",
+      "description": "Food out"
     }
   ]
 }
