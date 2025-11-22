@@ -5,10 +5,11 @@ Currently saves transactions and balance into a JSON file which can be read and 
 Functionality:
 	- View Balance
 	- Add Transactions
-
-To add:
 	-	Delete transactions
 	- Edit transactions
+
+
+To add:
 	- Find useful info
 		- Profit / Expenditure in any given time
 		- Trends (maybe with graphs later)

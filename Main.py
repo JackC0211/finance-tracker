@@ -23,11 +23,13 @@ def main() -> None:
 				myTransaction = input_transaction()
 				app_object.add_transaction(myTransaction)
 			case 3:
-				transaction_to_edit = app_object.find_transaction(input_transaction(isedit=True)) #TODO add a way to edit a transaction - maybe withj a date, amount and description
+				transaction_to_edit = app_object.find_transaction(input_transaction(isedit=True)) 
 				if transaction_to_edit :
 					app_object.edit_transaction(transaction_to_edit)
 			case 4:
-				pass #TODO add a way to delete a transaction
+				transaction_to_remove = app_object.find_transaction(input_transaction(isedit=True)) 
+				if transaction_to_remove :
+					app_object.delete_transaction(transaction_to_remove)
 			case 5:
 				break
 			case _:

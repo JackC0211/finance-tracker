@@ -111,38 +111,28 @@ class FinanceTracker:
 					print(Exception)
 
 		while True:
-			print(
-'''
-What would you like to edit?:
-0 - exit editor
-1 - transaction_type
-2 - amount
-3 - category
-4 - date
-5 - description
-''')
-			try: # value check
-				answer = int(input("Choice: ").strip())
-			except ValueError:
-				print("Invald Number, try again: ")
-				continue
+			print("\nEdit options (0 to exit):")
+			for key, value in edit_options.items():
+				print(f"{key} - {value[0]}")
+			answer = int(input("Choice: ").strip())
 
 			if answer == 0: # exit case
-				print("Exiting editor.")
 				break
 
-			field_info = edit_options.get(answer)
-			if not field_info:
-				print("Invalid option, try again")
+			if answer not in edit_options:
+				print("invalid option")
 				continue
 
-			field_name, converter = field_info
+			field_name, converter = edit_options[answer]
 			new_value = get_valid_input(f"Enter a new value for '{field_name}': ", converter) # user input to change
 			setattr(transaction_to_edit, field_name, new_value) # chnaged the ransaction with the new input
 			self.save()
 			print(f"{field_name} edited succesfully!")
 
-
+	def delete_transaction(self,transaction_to_remove:Transaction):
+		self.transactions.remove(transaction_to_remove)
+		self.save()
+	
 	def get_balance(self) -> float:
 
 		"""Find the balance in the account
