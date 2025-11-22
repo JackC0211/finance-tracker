@@ -70,27 +70,12 @@ class FinanceTracker:
 		transaction : Transaction
 			The transaction to be added. Must contaoning an amount and a type.
 
-		Raises
-		------
-		ValueError
-			If the transaction type is not "income" or "expense"
-
 		Notes
 		-----
 		Automatically saves changes to file using `save_data`
 		"""
 		self.transactions.append(transaction)
-		if transaction.transaction_type  == "income":
-			self.balance = round(self.balance+transaction.amount,2)
-		elif transaction.transaction_type == "expense":
-			self.balance = round(self.balance-transaction.amount,2)
-		else:
-			print("Not expense or income error")
-		data = {
-			"balance": self.balance,
-			"transactions": self.transactions
-		}
-		save_data(data)  
+		self.save()  
 
 	def edit_transaction(self,transaction_to_edit:Transaction):
 		"""
@@ -114,6 +99,16 @@ class FinanceTracker:
 			4: ("date", lambda x: x),
 			5: ("description", lambda x: x)
 		}
+		def get_valid_input(prompt: str, converter):
+			while True:
+				raw = input(prompt).strip()
+				try:
+					value = converter(raw)
+					if value is None:
+						raise ValueError
+					return value
+				except Exception:
+					print(Exception)
 
 		while True:
 			print(
@@ -133,35 +128,23 @@ What would you like to edit?:
 				continue
 
 			if answer == 0: # exit case
-				print("exiting editor.")
+				print("Exiting editor.")
 				break
 
-			if answer not in edit_options: # checks if valid value
-				print("invalid option, try again.")
+			field_info = edit_options.get(answer)
+			if not field_info:
+				print("Invalid option, try again")
 				continue
 
-			field_name, converter = edit_options[answer]
-
-			new_value_raw = input(f"Enter a new value for '{field_name}': ").strip() # user input to change
-
-			try:
-				new_value = converter(new_value_raw) # converts based on lambda function
-				if new_value is None:
-					raise ValueError
-			except Exception:
-				print("Invalid value.")
-				continue
-			
+			field_name, converter = field_info
+			new_value = get_valid_input(f"Enter a new value for '{field_name}': ", converter) # user input to change
 			setattr(transaction_to_edit, field_name, new_value) # chnaged the ransaction with the new input
+			self.save()
 			print(f"{field_name} edited succesfully!")
 
-			data = {
-				'balance': self.get_balance(),
-				'transactions': self.transactions
-			}
-			save_data(data)
 
 	def get_balance(self) -> float:
+
 		"""Find the balance in the account
 		
 		Returns
@@ -174,3 +157,6 @@ What would you like to edit?:
 			for t in self.transactions), 2)
 		
 		return self.balance
+	
+	def save(self):
+		save_data({'balance': self.get_balance(), 'transactions': self.transactions})
