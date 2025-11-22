@@ -1,23 +1,32 @@
 from datetime import date
-import json
 
 from finance_tracker import FinanceTracker
 from transaction import Transaction
-from storage import load_data, save_data
-
 	
-def get_data_from_user() -> Transaction: # creates a dict of user input --- returns json formatted data
+def get_data_from_user() -> Transaction:
+	"""
+	Collects user input for all fields to create a transaction
+	
+	Returns
+	-------
+	Transaction
+		- transaction type ("income" or "expense")
+		- amount (float)
+		- category (string, defaults to "General" when empty)		
+		- date (string in YYYY-MM-DD format, defaults to today)
+		- description (optional string)
+
+	"""
+	
 	user_inputs:dict[str, str|float] = {}
 
-	# type
 	while True:
 		input_type = input("type (expense/income): ").strip().lower()
 		if input_type in ['expense','income']:
-			user_inputs['type'] = input_type
+			user_inputs['transaction_type'] = input_type
 			break
 		print("Please enter 'expense' or 'income'.")
 
-	#amount
 	while True:
 		try:
 			amount = float(input("amount: ").strip())
@@ -26,19 +35,15 @@ def get_data_from_user() -> Transaction: # creates a dict of user input --- retu
 		except ValueError:
 			print("Please enter a valid amount.")
 
-	
-	# category
 	user_inputs['category'] = input("category: ").strip() or "General"
 
-	# date (defaults to current day)
 	date_input = input(f"date (YYYY-MM-DD) [default {date.today()}]: ").strip()
 	user_inputs['date'] = date_input if date_input else str(date.today().strftime("%Y-%m-%d"))
 	
-	# Description
 	user_inputs['description'] = input("description: ").strip() or ""
 
 	return Transaction(
-    user_inputs["type"],
+    user_inputs["transaction_type"],
     user_inputs["amount"],
     user_inputs["category"],
     user_inputs["date"],
@@ -46,16 +51,14 @@ def get_data_from_user() -> Transaction: # creates a dict of user input --- retu
 )
 
 
-def main():
+def main() -> None:
 	app_object = FinanceTracker()
 	while True:
-		print(
-			"\n1- Check Balance\n"
-			"2- Add Transaction\n"
-			"3- Delete Transaction\n"
-			"4- Edit Transaction\n"
-			"5- Close\n"
-		)
+		print("1- Check Balance")
+		print("2- Add Transaction")
+		print("3- Delete Transaction")
+		print("4- Edit Transaction")
+		print("5- Close")
 		try:
 			answer = int(input())
 		except ValueError:

@@ -1,12 +1,33 @@
 {
-  "balance": 100.0,
+  "balance": 990.0,
   "transactions": [
     {
       "transaction_type": "income",
-      "amount": 100.0,
-      "category": "salary",
+      "amount": 10.0,
+      "category": "General",
       "date": "2025-11-22",
-      "description": "payed"
+      "description": ""
+    },
+    {
+      "transaction_type": "expense",
+      "amount": 10.0,
+      "category": "food",
+      "date": "2025-11-22",
+      "description": ""
+    },
+    {
+      "transaction_type": "expense",
+      "amount": 10.0,
+      "category": "General",
+      "date": "2025-11-22",
+      "description": ""
+    },
+    {
+      "transaction_type": "income",
+      "amount": 1000.0,
+      "category": "General",
+      "date": "2025-11-22",
+      "description": ""
     }
   ]
 }
