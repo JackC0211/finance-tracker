@@ -1,9 +1,8 @@
-from datetime import date
-
 from finance_tracker import FinanceTracker
 from input_handler import input_transaction
 
-def main() -> None:
+
+def user_selection():
 	app_object = FinanceTracker()
 	while True:
 		print("1- Check Balance")
@@ -34,6 +33,10 @@ def main() -> None:
 				break
 			case _:
 				print("Invalid selection.")
+
+
+def main() -> None:
+	user_selection()
 
 
 if __name__ == '__main__':
