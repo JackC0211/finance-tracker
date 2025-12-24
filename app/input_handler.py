@@ -1,6 +1,7 @@
 from datetime import date
 
 from transaction import Transaction
+from utils import is_hex
 
 def input_transaction(isedit=False) -> Transaction:
 	"""
@@ -50,3 +51,13 @@ def input_transaction(isedit=False) -> Transaction:
     user_inputs["description"]
 )
 
+def find_existing_transaction():
+	print("Enter the ID of the transction you are looking for: ")
+	while True:
+		inputted_id = input()
+		if len(inputted_id) != 36:
+			print("Incorrect number of digits. Try again: ")
+		if not is_hex(inputted_id):
+			print("IDs only contain hexadecimal digits. Try again: ")
+		break
+	return inputted_id

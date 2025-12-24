@@ -1,5 +1,5 @@
 from finance_tracker import FinanceTracker
-from input_handler import input_transaction
+from input_handler import input_transaction, find_existing_transaction
 
 
 def user_selection():
@@ -22,11 +22,11 @@ def user_selection():
 				myTransaction = input_transaction()
 				app_object.add_transaction(myTransaction)
 			case 3:
-				transaction_to_edit = app_object.find_transaction(input_transaction(isedit=True)) 
+				transaction_to_edit = app_object.find_transaction(find_existing_transaction()) 
 				if transaction_to_edit :
 					app_object.edit_transaction(transaction_to_edit)
 			case 4:
-				transaction_to_remove = app_object.find_transaction(input_transaction(isedit=True)) 
+				transaction_to_remove = app_object.find_transaction(find_existing_transaction()) 
 				if transaction_to_remove :
 					app_object.delete_transaction(transaction_to_remove)
 			case 5:

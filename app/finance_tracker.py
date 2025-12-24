@@ -6,7 +6,7 @@ from pathlib import Path
 from transaction import Transaction
 from storage import load_data, save_data
 
-DATA_FILE =Path("data/finances.json") 
+DATA_FILE = Path("data/finances.json") 
 
 class FinanceTracker:
 	"""Main class responsible for managing transactions and balance
@@ -33,14 +33,14 @@ class FinanceTracker:
 		self.balance = data["balance"]
 		self.transactions = data["transactions"]
 	
-	def find_transaction(self,inputted_transaction:Transaction) -> Transaction | None:
+	def find_transaction(self,inputted_id:str) -> Transaction | None:
 		"""
 		find an existing transaction from file
 		
 		Parameters
 		----------
-		inputted_details : Transaction
-			all of the details given by the user to find the wanted transaction
+		inputted_id : str
+			ID inputted by the user for a certain known transaction.
 
 		Returns
 		-------
@@ -55,7 +55,7 @@ class FinanceTracker:
 		]
 
 		for t in all_transactions: # checks all the transactions from file
-			if inputted_transaction == t:
+			if inputted_id == t.id:
 				return t
 		print("Unable to find transaction")
 		return None
