@@ -1,6 +1,6 @@
 from finance_tracker import FinanceTracker
 from input_handler import input_transaction, find_existing_transaction
-
+from plots import plot_expenses
 
 def user_selection():
 	app_object = FinanceTracker()
@@ -9,7 +9,8 @@ def user_selection():
 		print("2- Add Transaction")
 		print("3- Edit Transaction")
 		print("4- Delete Transaction")
-		print("5- Close \n ")
+		print("5- Plot Expenses")
+		print("6- Close \n ")
 		try:
 			answer = int(input())
 		except ValueError:
@@ -30,6 +31,8 @@ def user_selection():
 				if transaction_to_remove :
 					app_object.delete_transaction(transaction_to_remove)
 			case 5:
+				plot_expenses(app_object.transactions)
+			case 6:
 				break
 			case _:
 				print("Invalid selection.")
