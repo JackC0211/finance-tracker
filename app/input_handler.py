@@ -57,7 +57,10 @@ def find_existing_transaction():
 		inputted_id = input()
 		if len(inputted_id) != 36:
 			print("Incorrect number of digits. Try again: ")
+			continue
 		if not is_hex(inputted_id):
 			print("IDs only contain hexadecimal digits. Try again: ")
+			continue
 		break
+		
 	return inputted_id

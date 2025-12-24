@@ -27,13 +27,13 @@ class Transaction:
 	date : str
 	description : str
 	"""
-	def __init__(self, transaction_type:str, amount:float, category:str, date:str, description:str= ""):
+	def __init__(self, transaction_type:str, amount:float, category:str, date:str, description:str= "", id: str|None=None):
 		self.transaction_type = transaction_type
 		self.amount = amount
 		self.category = category
 		self.date = date
 		self.description = description
-		self.id = str(uuid4())
+		self.id = str(uuid4()) if id is None else id
 
 	def to_dict(self) -> dict:
 		"""
@@ -49,7 +49,8 @@ class Transaction:
 			"amount": self.amount,
 			"category": self.category,
 			"date": self.date,
-			"description": self.description
+			"description": self.description,
+			"id": self.id
 		}
 	def __str__(self) -> str:
 		"""Returns a readable string of the transaction"""
