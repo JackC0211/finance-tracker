@@ -1,6 +1,7 @@
 """
 Transaction model used to represent a single record
 """
+from uuid import uuid4
 class Transaction:
 	"""
 	Represents a single financial transactions
@@ -32,7 +33,8 @@ class Transaction:
 		self.category = category
 		self.date = date
 		self.description = description
-	
+		self.id = str(uuid4())
+
 	def to_dict(self) -> dict:
 		"""
 		Convert the Transaction object to a dictionary
