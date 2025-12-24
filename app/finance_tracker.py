@@ -34,28 +34,8 @@ class FinanceTracker:
 		self.transactions = data["transactions"]
 	
 	def find_transaction(self,inputted_id:str) -> Transaction | None:
-		"""
-		find an existing transaction from file
-		
-		Parameters
-		----------
-		inputted_id : str
-			ID inputted by the user for a certain known transaction.
-
-		Returns
-		-------
-		
-		"""
-		
-		all_transactions:list[Transaction] = self.transactions
-		# Check that list is full of Transaction class
-		all_transactions = [
-			Transaction(**t) if isinstance(t, dict) else t
-			for t in all_transactions
-		]
-
-		for t in all_transactions: # checks all the transactions from file
-			if inputted_id == t.id:
+		for t in self.transactions:
+			if inputted_id ==t.id:
 				return t
 		print("Unable to find transaction")
 		return None
@@ -77,57 +57,15 @@ class FinanceTracker:
 		self.transactions.append(transaction)
 		self.save()  
 
-	def edit_transaction(self,transaction_to_edit:Transaction):
-		"""
-		Edits an existing transaction
+	def update_transaction(self,transaction: Transaction, **changes) -> None:
+		allowed = {"transaction_type", "amount", "category", "date", "description"}
 
-		Parameters
-		----------
-		transaction_to_edit : Transaction
-			The transaction that is to be changed
+		for field, value in changes.items():
+			if field not in allowed:
+				raise ValueError(f"Unknown field: {field}")
+			setattr(transaction, field, value)
+		self.save()
 
-		Notes
-		-----
-		Automatically saves changes to file using `save_data`
-
-		Takes user input to change certain elements of the Transaction
-		"""
-		edit_options = { # all 5 edit options with how to format them
-			1: ("transaction_type", lambda x: x if x in ['income','expense'] else None),
-			2: ("amount", lambda x: float(x)),
-			3: ("category", lambda x: x),
-			4: ("date", lambda x: x),
-			5: ("description", lambda x: x)
-		}
-		def get_valid_input(prompt: str, converter):
-			while True:
-				raw = input(prompt).strip()
-				try:
-					value = converter(raw)
-					if value is None:
-						raise ValueError
-					return value
-				except Exception:
-					print(Exception)
-
-		while True:
-			print("\nEdit options (0 to exit):")
-			for key, value in edit_options.items():
-				print(f"{key} - {value[0]}")
-			answer = int(input("Choice: ").strip())
-
-			if answer == 0: # exit case
-				break
-
-			if answer not in edit_options:
-				print("invalid option")
-				continue
-
-			field_name, converter = edit_options[answer]
-			new_value = get_valid_input(f"Enter a new value for '{field_name}': ", converter) # user input to change
-			setattr(transaction_to_edit, field_name, new_value) # chnaged the ransaction with the new input
-			self.save()
-			print(f"{field_name} edited succesfully!")
 
 	def delete_transaction(self,transaction_to_remove:Transaction):
 		self.transactions.remove(transaction_to_remove)
